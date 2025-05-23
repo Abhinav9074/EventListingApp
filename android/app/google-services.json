@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "603057842547",
+    "project_id": "alleventsapp-2f6d1",
+    "storage_bucket": "alleventsapp-2f6d1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603057842547:android:0f33402daf7e7950107d06",
+        "android_client_info": {
+          "package_name": "com.example.event_listing_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603057842547-ot4045s55opn7q3euf7h1k6n3cagbuk2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.event_listing_app",
+            "certificate_hash": "3145173ede79b4c7ccab10650337369f2b7f9b69"
+          }
+        },
+        {
+          "client_id": "603057842547-u0ku6umasj7hetjp5nfj91ebaaqros34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR1rVxD_KnF4zgs5L0OzO1UEdXSvRlLXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603057842547-u0ku6umasj7hetjp5nfj91ebaaqros34.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "603057842547-ig3u49cdmih8t6pdlgbmla56jbp75jea.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eventListingApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

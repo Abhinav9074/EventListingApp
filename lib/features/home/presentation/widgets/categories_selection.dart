@@ -78,7 +78,7 @@ class _CartegorySelectionState extends ConsumerState<CartegorySelection> {
           ),
           SizedBox(height: 10.h),
           SizedBox(
-            height: 150.h,
+            height: 170.h,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: state.categories.length,

@@ -103,6 +103,6 @@ class EventsAppbar extends StatelessWidget implements PreferredSizeWidget {
     final statusBarHeight =
         WidgetsBinding.instance.window.padding.top /
         WidgetsBinding.instance.window.devicePixelRatio;
-    return Size.fromHeight(70.h + statusBarHeight);
+    return Size.fromHeight(80.h + statusBarHeight);
   }
 }

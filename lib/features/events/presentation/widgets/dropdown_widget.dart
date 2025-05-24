@@ -42,10 +42,8 @@ class _CombinedDropdownWidgetState extends ConsumerState<CombinedDropdownWidget>
     });
 
     try {
-      // Clear previous events
       ref.read(eventControllerProvider.notifier).resetEvents();
       
-      // Fetch new events
       await ref.read(eventControllerProvider.notifier).fetchEvents(newCategory.link);
     } catch (e) {
       log('Error fetching events: $e');
@@ -66,7 +64,6 @@ class _CombinedDropdownWidgetState extends ConsumerState<CombinedDropdownWidget>
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
-          // Category Dropdown
           Expanded(
             child: _buildCategoryDropdown(
               categories: state.categories,
@@ -77,7 +74,6 @@ class _CombinedDropdownWidgetState extends ConsumerState<CombinedDropdownWidget>
           ),
           const SizedBox(width: 12),
           
-          // Date Dropdown
           Expanded(
             child: _buildDropdown(
               label: 'Date',
@@ -91,7 +87,6 @@ class _CombinedDropdownWidgetState extends ConsumerState<CombinedDropdownWidget>
           ),
           const SizedBox(width: 12),
           
-          // Price Dropdown
           Expanded(
             child: _buildDropdown(
               label: 'Price',
@@ -156,6 +151,9 @@ class _CombinedDropdownWidgetState extends ConsumerState<CombinedDropdownWidget>
           child: Text(
             category.name.titleCase,
             style: const TextStyle(fontSize: 14),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            softWrap: false,
           ),
         ),
       );
@@ -193,6 +191,9 @@ class _CombinedDropdownWidgetState extends ConsumerState<CombinedDropdownWidget>
                     child: Text(
                       item,
                       style: const TextStyle(fontSize: 14),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      softWrap: false,
                     ),
                   ),
                 );

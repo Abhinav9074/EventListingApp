@@ -48,6 +48,18 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
     final state = ref.watch(eventControllerProvider);
 
     return Scaffold(
+      floatingActionButton: IconButton(
+        tooltip: isGridView ? 'Switch to List View' : 'Switch to Grid View',
+        icon: Icon(isGridView ? Icons.list : Icons.grid_view),
+        onPressed:
+            isCategoryLoading
+                ? null
+                : () {
+                  setState(() {
+                    isGridView = !isGridView;
+                  });
+                },
+      ),
       appBar: EventsAppbar(),
       body: Padding(
         padding: const EdgeInsets.all(15),
@@ -70,26 +82,11 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                     ),
                   ),
                 ),
-                IconButton(
-                  tooltip: isGridView ? 'Switch to List View' : 'Switch to Grid View',
-                  icon: Icon(isGridView ? Icons.list : Icons.grid_view),
-                  onPressed: isCategoryLoading
-                      ? null
-                      : () {
-                          setState(() {
-                            isGridView = !isGridView;
-                          });
-                        },
-                ),
               ],
             ),
             const SizedBox(height: 16),
             if (isCategoryLoading && state.events.isEmpty)
-              const Expanded(
-                child: Center(
-                  child: CupertinoActivityIndicator(),
-                ),
-              )
+              const Expanded(child: Center(child: CupertinoActivityIndicator()))
             else if (state.error != null)
               Expanded(
                 child: Center(
@@ -115,11 +112,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                 ),
               )
             else if (state.events.isEmpty)
-              const Expanded(
-                child: Center(
-                  child: CupertinoActivityIndicator(),
-                ),
-              )
+              const Expanded(child: Center(child: CupertinoActivityIndicator()))
             else
               Expanded(
                 child: RefreshIndicator(
@@ -129,27 +122,30 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                       await _fetchEvents(currentCategory.link);
                     }
                   },
-                  child: isGridView
-                      ? GridView.builder(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          itemCount: state.events.length,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 15,
-                            crossAxisSpacing: 15,
-                            childAspectRatio: 1.2,
+                  child:
+                      isGridView
+                          ? GridView.builder(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            itemCount: state.events.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 15,
+                                  crossAxisSpacing: 15,
+                                  childAspectRatio: 1.2,
+                                ),
+                            itemBuilder: (context, index) {
+                              return EventGridWidget(data: state.events[index]);
+                            },
+                          )
+                          : ListView.separated(
+                            itemCount: state.events.length,
+                            separatorBuilder:
+                                (_, __) => const SizedBox(height: 30),
+                            itemBuilder: (context, index) {
+                              return EventWidget(data: state.events[index]);
+                            },
                           ),
-                          itemBuilder: (context, index) {
-                            return EventGridWidget(data: state.events[index]);
-                          },
-                        )
-                      : ListView.separated(
-                          itemCount: state.events.length,
-                          separatorBuilder: (_, __) => const SizedBox(height: 30),
-                          itemBuilder: (context, index) {
-                            return EventWidget(data: state.events[index]);
-                          },
-                        ),
                 ),
               ),
           ],

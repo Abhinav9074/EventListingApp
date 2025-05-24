@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:event_listing_app/features/home/presentation/widgets/categories_selection.dart';
 import 'package:event_listing_app/features/home/presentation/widgets/custom_appbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -42,7 +43,7 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
             SizedBox(
-              height: 220,
+              height: 240.h, 
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.all(16),
@@ -126,25 +127,49 @@ class HomeScreen extends ConsumerWidget {
     required String imageUrl,
   }) {
     return Container(
-      width: 280,
+      width: 280.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Colors.grey.shade200,
+        color: Colors.white,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min, 
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-            child: Image.network(imageUrl, height: 120, width: 280, fit: BoxFit.cover),
+            child: Image.network(
+              imageUrl, 
+              height: 120, 
+              width: 280, 
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  height: 120,
+                  width: 280,
+                  color: Colors.grey[300],
+                  child: const Icon(Icons.error, color: Colors.grey),
+                );
+              },
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(dateTime, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+            child: Text(
+              dateTime, 
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+            child: Text(
+              title, 
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),
@@ -163,9 +188,9 @@ class HomeScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
+            Text(label, style: const TextStyle(fontWeight: FontWeight.w600,fontSize: 10)),
             const SizedBox(height: 4),
-            Text(date, style: const TextStyle(color: Colors.grey)),
+            Text(date, style: const TextStyle(color: Colors.grey,fontSize: 10)),
           ],
         ),
       ),
